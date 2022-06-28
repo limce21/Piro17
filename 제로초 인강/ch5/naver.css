@@ -37,6 +37,21 @@ body {
    width: 1080px;
 }
 
+#header-top {
+   float: right;
+}
+
+#header-top span {
+   color: #888; /* 똑같은 숫자가 반복되면 두 글자씩 묶어 줄일 수 있다. 원래 #888888임.*/
+   letter-spacing: -1px; /* 글자 사이의 간격(자간) */
+   font-size: 11px; /* 폰트의 크기 */
+   line-height: 22px; /* 글자들 겹칠 수도 있음 */
+}
+
+#header-search {
+   clear: both;
+}
+
 #header-search a {
    text-decoration: none;
 }
