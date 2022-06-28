@@ -32,7 +32,7 @@ body {
    height: 1px;
 }
 
-#header-center {
+.center-align {
    margin: 0 auto;
    width: 1080px;
 }
@@ -102,4 +102,56 @@ body {
    height: 21px;
    display: inline-block;
    margin: 14px;
+}
+
+nav ul {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+nav li {
+   display: inline-block;
+}
+
+nav li span:first-child {
+   background-image: url(./sp_nav.png);
+   background-repeat: no-repeat;
+   display: inline-block;
+}
+
+nav li:first-child span:first-child {
+   width: 25px;
+   height: 16px;
+   background-position: 0 -285px;
+}
+
+nav li:nth-child(2) span:first-child {
+   width: 25px;
+   height: 16px;
+   background-position: -279px -52px;
+}
+
+nav li:nth-child(3) span:first-child {
+   width: 40px;
+   height: 16px;
+   background-position: -100px -182px;
+}
+
+nav li:nth-child(4) span:first-child {
+   width: 40px;
+   height: 16px;
+   background-position: -101px -156px;
+}
+
+nav li:nth-child(5) span:first-child {
+   width: 26px;
+   height: 16px;
+   background-position: -279px -156px;
+}
+
+nav li:nth-child(6) span:first-child {
+   width: 25px;
+   height: 16px;
+   background-position: -70px -285px;
 }
