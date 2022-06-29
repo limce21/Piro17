@@ -26,6 +26,10 @@ h6 {
    display: inline-block;
 }
 
+.float-left {
+   float: left;
+}
+
 #fixed {
    position: fixed;
    top: 50px;
@@ -339,11 +343,18 @@ main h3:nth-child(3) {
    margin-bottom: 8px;
 }
 
-#main-second-block .inline-block:first-child {
-   width: 740px;
+#main-second-block {
+   display: inline-block;
+   vertical-align: top;
+   margin-bottom: 8px;
 }
 
-#main-second-block .inline-block:last-child {
+#main-second-block .float-left:first-child {
+   width: 740px;
+   margin-right: 8px;
+}
+
+#main-second-block .float-left:last-child {
    width: 332px;
    vertical-align: top;
 }
@@ -353,7 +364,6 @@ main h3:nth-child(3) {
    width: 740px;
    height: 46px;
    background-color: white;
-   margin-right: 8px;
    margin-bottom: 8px;
 }
 
@@ -368,7 +378,7 @@ main h3:nth-child(3) {
    height: 246px;
    background-color: white;
    margin-right: 8px;
-   margin-bottom: 8px;
+   vertical-align: top;
 }
 
 #main-newsstand h3 {
@@ -405,6 +415,7 @@ main h3:nth-child(3) {
    vertical-align: top;
    background-color: white;
    margin-bottom: 8px;
+   vertical-align: top;
 }
 
 #main-second-ad {
@@ -412,18 +423,19 @@ main h3:nth-child(3) {
    width: 332px;
    height: 150px;
    background: #555;
-   margin-bottom: 8px;
+   vertical-align: top;
 }
 
 #main-third-block {
    display: inline-block;
    width: 100%;
+   vertical-align: top;
 }
 
 #main-category {
    float: left;
    width: 740px;
-   height: 837px;
+   height: 882px;
    background: white;
    margin-bottom: 8px;
    margin-right: 8px;
@@ -432,14 +444,20 @@ main h3:nth-child(3) {
 #main-shopping {
    float: left;
    width: 332px;
-   height: 837px;
+   height: 882px;
    background: white;
    margin-bottom: 8px;
+}
+
+#main-shopping iframe {
+   width: 100%;
+   height: 100%;
 }
 
 #main-fourth-block {
    display: inline-block;
    width: 100%;
+   vertical-align: top;
 }
 
 #main-event {
