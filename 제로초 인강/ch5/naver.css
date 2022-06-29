@@ -10,6 +10,7 @@ html,
 body {
    margin: 0;
    padding: 0;
+   font-family: Dotum, "돋움", Helvetica, "Apple SD Gothic Neo", sans-serif;
 }
 
 #fixed {
@@ -32,6 +33,14 @@ body {
    height: 1px;
 }
 
+.relative {
+   position: relative;
+}
+
+header {
+   height: 170px;
+}
+
 .center-align {
    margin: 0 auto;
    width: 1080px;
@@ -39,6 +48,7 @@ body {
 
 #header-top {
    float: right;
+   margin-top: 8px;
 }
 
 #header-top span {
@@ -50,6 +60,7 @@ body {
 
 #header-search {
    clear: both;
+   padding-top: 12px;
 }
 
 #header-search a {
@@ -67,7 +78,8 @@ body {
    background: url(./sp_search.png) -4px -4px no-repeat;
    vertical-align: middle;
    position: relative;
-   top: -6px;
+   top: -5px;
+   left: 1px;
 }
 
 #header-search h1 span {
@@ -79,7 +91,7 @@ body {
 }
 
 #header-search fieldset {
-   margin-left: 20px;
+   margin-left: 18px;
    padding: 12px 0 12px 10px;
    width: 521px;
    height: 49px;
@@ -119,9 +131,16 @@ body {
    margin: 14px;
 }
 
+nav {
+   height: 46px;
+   border-top: 1px solid #f1f3f6;
+   border-bottom: 1px solid #d1d8e4;
+}
+
 nav ul {
+   display: inline-block;
    margin: 0;
-   padding: 0;
+   padding: 16px 0 0 4px;
    list-style: none;
 }
 
@@ -140,7 +159,7 @@ nav li span:first-child {
    background-image: url(./sp_nav.png);
    background-repeat: no-repeat;
    display: inline-block;
-   margin-left: 14px;
+   margin-left: 10px;
 }
 
 nav li:nth-child(2) span:first-child {
@@ -171,4 +190,24 @@ nav li:nth-child(6) span:first-child {
    width: 25px;
    height: 16px;
    background-position: -70px -285px;
+}
+
+.nav-divider {
+   display: inline-block;
+   margin: 18px 16px 0;
+   width: 1px;
+   height: 14px;
+   background: #ebeef3;
+}
+
+#search-ranking {
+   position: absolute;
+   top: 16px;
+   right: 100px;
+}
+
+#rank-number {
+   margin-top: -9px;
+   color: #00ab33;
+   font-size: 16px;
 }
