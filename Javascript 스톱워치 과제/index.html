@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>StopWatch</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <main>
+      <div class="title">
+         <i class="fa-solid fa-stopwatch"></i>
+         <h2>피로그래밍 스톱워치</h2>
+      </div>
+      <div class="stopwatch">
+         <div class="showTime">
+            <div class="sec">00</div>
+            <div>:</div>
+            <div class="milisec">00</div>
+         </div>
+         <div class="button-container">
+            <button class="startBtn">Start</button>
+            <button class="stopBtn">Stop</button>
+            <button class="resetBtn">Reset</button>
+         </div>
+      </div>
+      <div class="record-list">
+         <ul id="record-list-ul">
+            <li class="first">
+               <button class="checkBtn-first" value="0"></button>
+               <div class="record">구간기록</div>
+               <button id="delBtn" class="delBtn">
+                  <i class="fa-solid fa-trash"></i>
+               </button>
+            </li>
+         </ul>
+      </div>
+   </main>
+   <script src="https://kit.fontawesome.com/ecfb069e3d.js" crossorigin="anonymous"></script>
+   <script src="./script.js"></script>
+</body>
+
+</html>
