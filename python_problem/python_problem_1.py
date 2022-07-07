@@ -10,3 +10,7 @@ while(1):
             break
     except:
         print("정수를 입력하세요")
+
+for i in range(x):
+    num += 1
+    print("PlayerA :", num)
