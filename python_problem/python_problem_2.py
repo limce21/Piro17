@@ -1,8 +1,5 @@
 # 함수 이름은 변경 가능합니다.
 
-names = []
-students = []
-
 # menu 1
 
 
@@ -56,6 +53,9 @@ class Student:
 
 
 # 학생 정보를 저장할 변수 초기화
+names = []
+students = []
+
 print("*Menu*******************************")
 print("1. Inserting students Info(name score1 score2)")
 print("2. Grading")
