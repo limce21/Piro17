@@ -40,8 +40,13 @@ def create(request):
 
 def detail(request, id):
     post = Post.objects.get(id=id)
+    running_time = int(post.running_time)
+    hour = running_time // 60
+    minute = running_time % 60
+    running_time = str(hour) + "시간 " + str(minute) + "분"
     context = {
-        "post": post
+        "post": post,
+        "running_time": running_time
     }
     return render(request, template_name="posts/detail.html", context=context)
  
