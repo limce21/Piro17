@@ -1,3 +1,4 @@
+from unittest import runner
 from django.shortcuts import render
 
 # Create your views here.
@@ -56,7 +57,7 @@ def update(request, id):
         running_time = request.POST['running_time']
         
         Post.objects.filter(id=id).update(title=title, release_year=release_year,
-                           genre=genre, rate=rate, director=director, main=main, review=review,running_time=running_time )
+                           genre=genre, rate=rate, director=director, main=main, review=review,running_time=running_time)
 
         return redirect(f"/post/{id}")
      

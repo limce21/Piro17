@@ -5,24 +5,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상세화면</title>
+    <style>
+      html {
+        background-color: black;
+        color: white;
+      }
+
+      body {
+        height: 100vh;
+        margin: 0 3rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .review {
+        position: absolute;
+        top: 1.2rem;
+        right: 0;
+        font-size: 1.2rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      a:link,
+      a:visited {
+        color: white;
+      }
+
+      .titleNbtn {
+        position: relative;
+      }
+
+      a:hover,
+      .delBtn:hover {
+        color: #ccc;
+      }
+
+      h1 {
+        color: red;
+        font-size: 3rem;
+        display: inline-block;
+      }
+
+      .delBtn {
+        border: none;
+        font-size: 1.2rem;
+        background: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      h2 {
+        display: inline-block;
+      }
+
+      .container {
+        display: flex;
+        gap: 2rem;
+        background-color:#111;
+        padding: 1rem;
+      }
+
+      .pContainer {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .txtContainer {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .txtContainer p:first-child {
+        font-weight: bold;
+      }
+
+      .containerReview {
+        background-color:#111;
+        padding: 1rem;
+        margin-top: 1.5rem;
+      }
+    </style>
   </head>
   <body>
-    <a href="{% url 'posts:home' %}">my Movie reviews</a>
-    <article>
+    <a href="{% url 'posts:home' %}"><h1>my Movie reviews</h1></a>
+    <div class="titleNbtn">
       <h2>{{ post.title }}</h2>
-      <p>개봉년도 {{ post.release_year }}</p>
-      <p>감독 {{post.director}}</p>
-      <p>주연 {{post.main}}</p>
-      <p>장르 {{post.genre}}</p>
-      <p>별점 {{post.rate}}</p>
-      <p>러닝타임 {{post.running_time}}</p>
-      <div>{{post.review}}</div>
+      <div class="review">
+        <a class="modBtn" href="{% url 'posts:update' post.id %}">수정</a>
+        <form action="{% url 'posts:delete' post.id %}" method="post">
+          {% csrf_token %}
+          <button class="delBtn">삭제</button>
+        </form>
+      </div>
+    </div>
+    <article>
+      <div class="container">      
+        <img src="https://picsum.photos/seed/{{post.id}}/200/300"></img>
+        <div class="pContainer">
+          <div class="txtContainer"><p>개봉년도</p><p>{{ post.release_year }}</p></div>
+          <div class="txtContainer"><p>감독</p><p>{{ post.director }}</p></div>
+          <div class="txtContainer"><p>주연</p><p>{{ post.main }}</p></div>
+          <div class="txtContainer"><p>장르</p><p>{{ post.genre }}</p></div>
+          <div class="txtContainer"><p>별점</p><p>{{ post.rate }}</p></div>
+          <div class="txtContainer"><p>러닝타임</p><p>{{ post.running_time }}</p></div>
+          <p style="color: red;">{{post.running_hour}}</p>
+        </div>
+      </div>
+      <div class="containerReview">{{post.review}}</div>
     </article>
-
-    <a href="{% url 'posts:update' post.id %}">수정</a>
-    <form action="{% url 'posts:delete' post.id %}" method="post">
-      {% csrf_token %}
-      <button>삭제</button>
-    </form>
   </body>
 </html>

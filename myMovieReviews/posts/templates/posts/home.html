@@ -5,16 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>홈 화면</title>
+    <style>
+      html {
+        background-color: black;
+        color: white;
+      }
+
+      body {
+        height: 100vh;
+        margin: 0 3rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .review {
+        position: absolute;
+        right: 5rem;
+        top: 3rem;
+        font-size: 1.2rem;
+      }
+
+      a:link,
+      a:visited {
+        color: white;
+      }
+
+      a:hover {
+        color: #ccc;
+      }
+
+      h1 {
+        color: red;
+        font-size: 3rem;
+        display: inline-block;
+      }
+
+      article {
+        background-color: #111;
+        width: 20rem;
+        text-align: center;
+      }
+
+
+      .post-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin: 0 auto;
+        flex-wrap: wrap;
+      }
+    </style>
   </head>
   <body>
-    {% for post in posts %}
-    <article>
-      <h2><a href="/post/{{post.id}}">{{ post.title }}</a></h2>
-      <p>개봉년도 {{post.release_year}}</p>
-      <p>장르 {{post.genre}}</p>
-      <p>별점 {{post.rate}}</p>
-    </article>
-    {% endfor %}
-    <a href="/create">리뷰작성</a>
+    <div class="title">
+      <a href="/"><h1>my Movie reviews</h1><a>
+      <a href="/create" class="review">리뷰작성</a>
+    </div>
+    <div class="post-container">
+      {% for post in posts %}
+      <article>
+        <img src="https://picsum.photos/seed/{{post.id}}/200/300"></img>
+        <h2><a href="/post/{{post.id}}">{{ post.title }}</a></h2>
+        <p>개봉년도 {{post.release_year}}</p>
+        <p>장르 {{post.genre}}</p>
+        <p>별점 {{post.rate}}</p>
+      </article>
+      {% endfor %}
+    </div>
   </body>
 </html>

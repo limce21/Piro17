@@ -5,13 +5,102 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 올리기</title>
+    <style>
+      html {
+        background-color: black;
+        color: white;
+      }
+
+      body {
+        height: 100vh;
+        margin: 0 3rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .review {
+        position: absolute;
+        right: 5rem;
+        top: 3rem;
+        font-size: 1.2rem;
+      }
+
+      a:link,
+      a:visited {
+        color: white;
+      }
+
+      a:hover {
+        color: #ccc;
+      }
+
+      h1 {
+        color: red;
+        font-size: 3rem;
+        display: inline-block;
+      }
+
+      form {
+        width: 40rem;
+        height: 40rem;
+        background-color: #111;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 3rem;
+      }
+
+      form legend {
+        font-size: 2rem;
+        color: red;
+      }
+
+      form hr {
+        width: 100%;
+      }
+
+      form p {
+        text-align: left;
+      }
+
+      form input,
+      textarea {
+        background-color: #555;
+        color: white;
+        border: none;
+        border-radius: 0.1rem;
+      }
+
+      .saveBtn {
+        border: none;
+        width: 4rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        background-color: #ccc;
+        font-size: 1.2rem;
+        color: black;
+      }
+
+      .saveBtn:hover {
+        background-color: red;
+      }
+    </style>
   </head>
   <body>
+    <div class="title">
+      <a href="/"><h1>my Movie reviews</h1><a>
+      <a href="/create" class="review">리뷰작성</a>
+    </div>
     <form action="/create" method="post">
+      <legend>Movie review</legend>
+      <hr color="red" />
       {% csrf_token %}
       <p>제목 : <input type="text" name="title" /></p>
-      <p>개봉연도 : <input type="number" name="release_year" /></p>
-      <p>장르 : <input type="text" name="genre" /></p>
+      <p>개봉년도 : <input type="number" name="release_year" /></p>
+      <p>장르 : <input name="genre" /></p>
       <p>별점 : <input type="float" name="rate" /></p>
       <p>러닝타임 : <input type="text" name="running_time" /></p>
       <p>리뷰 :</p>
@@ -19,7 +108,7 @@
       <p>감독 : <input type="text" name="director" /></p>
       <p>배우 : <input type="text" name="main" /></p>
       <div>
-        <input type="submit" value="save" />
+        <input type="submit" value="save" class="saveBtn" />
       </div>
     </form>
   </body>
