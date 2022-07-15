@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 올리기</title>
+  </head>
+  <body>
+    <form action="/create" method="post">
+      {% csrf_token %}
+      <p>제목 : <input type="text" name="title" /></p>
+      <p>개봉연도 : <input type="number" name="release_year" /></p>
+      <p>장르 : <input type="text" name="genre" /></p>
+      <p>별점 : <input type="float" name="rate" /></p>
+      <p>러닝타임 : <input type="text" name="running_time" /></p>
+      <p>리뷰 :</p>
+      <textarea name="review" id="" cols="30" rows="10"></textarea>
+      <p>감독 : <input type="text" name="director" /></p>
+      <p>배우 : <input type="text" name="main" /></p>
+      <div>
+        <input type="submit" value="save" />
+      </div>
+    </form>
+  </body>
+</html>
