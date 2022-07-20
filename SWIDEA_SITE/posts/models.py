@@ -14,7 +14,12 @@ class Post(models.Model):
     photo = models.ImageField(
         blank=True, upload_to='posts/%Y%m%d', verbose_name="사진")
     content = models.TextField(verbose_name="내용")
-    interest = models.IntegerField(default=0,verbose_name="가격")
+    interest = models.IntegerField(default=0,verbose_name="관심도")
     devTools = models.CharField(max_length=20, choices=TOOL_CHOICE, default=TOOL_CHOICE[0][0])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class DevTool(models.Model):
+    name = models.CharField(max_length=50, verbose_name="이름")
+    kind = models.CharField(max_length=50, verbose_name="종류")
+    content = models.TextField(verbose_name="설명")

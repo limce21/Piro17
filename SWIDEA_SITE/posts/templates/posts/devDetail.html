@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상세화면</title>
-    <link rel="stylesheet" href="{% static 'css/detail.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/devDetail.css'%}" />
   </head>
   <body>
     <nav>
@@ -20,38 +20,26 @@
     </nav>
     <article>
       <div class="title">
-        <h2>Idea Register</h2>
-        <p>아이디어 등록 페이지입니다. 당신의 아이디어를 잊지말고 기록하세요!</p>
+        <h2>DevTool Detail</h2>
+        <p>개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해 보아요.</p>
       </div>
       <div class="detail">
-        {% if post.photo %}
-        <p>
-          <img src="{{post.photo.url}}" />
-        </p>
-        {% endif %}
+        <h2>{{ devtool.name }}</h2>
         <div class="desc">
-          <h2>{{ post.title }}</h2>
-          <p>
-            1) 아이디어 관심도<br />
-            {{post.interest}}
-          </p>
-          <p>
-            2) 예상 개발 툴<br />
-            <span>{{post.devTools}}</span>
-          </p>
-          <p>
-            3) 아이디어 설명<br />
-            {{post.content}}
-          </p>
+          <p>{{devtool.kind}}</p>
+          <p>{{devtool.content}}</p>
+        </div>
+        <div class="canMake">
+          <h4>&gt; 만들 수 있는 SW 목록</h4>
         </div>
       </div>
       <div class="btnContainer">
-        <form action="{% url 'posts:delete' post.id %}" method="post">
+        <form action="{% url 'posts:dev-delete' devtool.id %}" method="post">
           {% csrf_token %}
           <button class="delBtn">삭제</button>
         </form>
-        <a href="{% url 'posts:home' %}" class="listBtn">목록</a>
-        <a href="{% url 'posts:update' post.id %}" class="updateBtn">수정</a>
+        <a href="{% url 'posts:dev-home' %}" class="listBtn">목록</a>
+        <a href="{% url 'posts:dev-update' devtool.id %}" class="updateBtn">수정</a>
       </div>
     </article>
   </body>

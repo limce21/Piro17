@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈 화면</title>
+    <link rel="stylesheet" href="{% static 'css/devHome.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href="{% url 'posts:home' %}">My <span>SW Idea</span> Manage</a>
+      </div>
+      <a href="{% url 'posts:create' %}"> 아이디어 등록 </a>
+      <a href="{% url 'posts:home' %}"> 아이디어 관리 </a>
+      <a href="{% url 'posts:dev-create' %}"> 개발툴 등록 </a>
+      <a href="{% url 'posts:dev-home' %}"> 개발툴 관리 </a>
+    </nav>
+
+    <article>
+      <div class="title">
+        <h2>DevTool List</h2>
+        <p>개발툴 목록 페이지 입니다. 자신이 사용가능한 개발들의 목록을 확인해 보세요.</p>
+      </div>
+      <div class="tools">
+        {% for devtool in devtools %}
+        <hr />
+        <div class="tool">
+          <a class="name" href="{% url 'posts:dev-detail' devtool.id %}"> {{devtool.name}} </a>
+          <p class="kind">{{devtool.kind}}</p>
+          <p class="content">{{devtool.content}}</p>
+        </div>
+        {% endfor %}
+        <hr />
+      </div>
+    </article>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idea Register</title>
+    <link rel="stylesheet" href="{% static 'css/devUpdate.css'%}" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href="{% url 'posts:home' %}">My <span>SW Idea</span> Manage</a>
+      </div>
+      <a href="{% url 'posts:create' %}"> 아이디어 등록 </a>
+      <a href="{% url 'posts:home' %}"> 아이디어 관리 </a>
+      <a href="{% url 'posts:create' %}"> 개발툴 등록 </a>
+      <a href="{% url 'posts:dev-home' %}"> 개발툴 관리 </a>
+    </nav>
+    <div>
+    <form action="{% url 'posts:dev-update' devtool.id %}" method="post">
+      {% csrf_token %}
+      <div class="title">      
+        <h2>DevTool Register</h2>
+        <p>개발툴 등록 페이지입니다. 자신이 다룰 수 있는 개발툴을 등록해 보세요.</p>
+      </div>
+      <div class="desc">
+        <p>
+          <p>이름:</p>
+          <input type="text" name="name" value="{{devtool.name}}"/>
+        </p>
+        <p>
+          <p>종류:</p>
+          <input type="text" name="kind" value="{{devtool.kind}}"/>
+        </p>
+        <p>개발툴 설명:</p>
+        <textarea name="content" id="" cols="30" rows="10">{{devtool.content}}</textarea>
+      </div>
+      <div>
+        <input class="submitBtn" type="submit" value="SUBMIT" />
+      </div>
+    </form>
+  </div>
+  </body>
+</html>

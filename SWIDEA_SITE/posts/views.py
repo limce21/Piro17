@@ -2,24 +2,20 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import redirect, render
-from .models import Post
+from .models import DevTool, Post
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 @csrf_exempt
 def home(request):
     if request.method == "POST":
-        print("들어옴!")
-        print(request.POST['interest'])
         post = Post.objects.get(id=request.POST['id'])
         interest = request.POST["interest"]
-        print(post.id)
         Post.objects.filter(id=post.id).update(interest=interest)
 
     
     posts = Post.objects.all()
     sort = request.GET.get('sort','None')
-    print(sort)
     if sort == "name":
        posts = posts.order_by("title")
     elif sort == "createAt":
@@ -27,7 +23,6 @@ def home(request):
     elif sort == "updateAt":
        posts = posts.order_by("-updated_at")
 
-    print(posts)
 
     context = {
         "posts": posts,
@@ -39,7 +34,6 @@ def create(request):
     if request.method == "POST":
         title = request.POST["title"]
         req_photo = request.FILES["photo"]
-        print("create", req_photo)
         content = request.POST["content"]
         interest = request.POST["interest"]
         devTools = request.POST["devTools"]
@@ -57,7 +51,6 @@ def create(request):
 def detail(request, id):
     post = Post.objects.get(id=id)
 
-    print(post)
     context = {
         "post": post
     }
@@ -65,11 +58,9 @@ def detail(request, id):
 
 
 def update(request, id):
-    print(request.method)
     if request.method == "POST":
         title = request.POST["title"]
         req_photo = request.FILES["photo"]
-        print("update", req_photo)
         content = request.POST["content"]
         interest = request.POST["interest"]
         devTools = request.POST["devTools"]
@@ -90,3 +81,51 @@ def delete(request, id):
     if request.method == "POST":
         Post.objects.filter(id=id).delete()
         return redirect("/")
+
+def create_devTool(request):
+    if request.method == "POST":
+        name = request.POST["name"]
+        content = request.POST["content"]
+        kind = request.POST["kind"]
+
+        DevTool.objects.create(name=name, content=content, kind=kind)
+
+        return redirect("/dev/")
+
+    context = {}
+
+    return render(request, template_name="posts/devCreate.html", context=context)
+
+def detail_devTool(request, id):
+    devtool = DevTool.objects.get(id=id)
+    context = {
+        "devtool": devtool
+    }
+    return render(request, template_name="posts/devDetail.html", context=context)
+
+def home_devTool(request):
+    devtools = DevTool.objects.all()
+    context = {
+        "devtools": devtools,
+    }
+    return render(request, template_name="posts/devHome.html", context=context)
+
+def delete_devTool(request, id):
+    if request.method == "POST":
+        DevTool.objects.filter(id=id).delete()
+        return redirect("/dev/")
+    
+def update_devTool(request, id):
+    if request.method == "POST":
+        name = request.POST["name"]
+        content = request.POST["content"]
+        kind = request.POST["kind"]
+
+        DevTool.objects.filter(id=id).update(name=name, content=content, kind=kind)
+        return redirect(f"/tool/{id}")
+
+    devtool = DevTool.objects.get(id=id)
+    context = {
+        "devtool": devtool,
+    }
+    return render(request, template_name="posts/devUpdate.html", context=context)
