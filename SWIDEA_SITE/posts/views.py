@@ -3,11 +3,20 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import redirect, render
 from .models import Post
-
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-
+@csrf_exempt
 def home(request):
+    if request.method == "POST":
+        print("들어옴!")
+        print(request.POST['interest'])
+        post = Post.objects.get(id=request.POST['id'])
+        interest = request.POST["interest"]
+        print(post.id)
+        Post.objects.filter(id=post.id).update(interest=interest)
+
+    
     posts = Post.objects.all()
     sort = request.GET.get('sort','None')
     print(sort)
