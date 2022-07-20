@@ -45,11 +45,11 @@
           <div class="desc">
             <a href="{% url 'posts:detail' post.id %}"> {{post.title}} </a>
             <hr />
-            <p>예상 개발툴 : {{post.devTools}}</p>
+            <p>예상 개발툴 : {{post.test.name}}</p>
             <div class="interest">
               아이디어 관심도 :
               <button class="plusBtn" onClick="plusInterest({{post.id}})">+</button>
-              <p class="interestState">{{post.interest}}</p>
+              <p id="{{post.id}}" class="interestState">{{post.interest}}</p>
               <button class="minusBtn" onClick="minusInterest({{post.id}})">-</button>
             </div>
           </div>

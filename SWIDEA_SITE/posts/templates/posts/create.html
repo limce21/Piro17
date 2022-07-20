@@ -42,8 +42,9 @@
           <input type="number" name="interest" />
         </p>
         <p>예상 개발툴:</p>
-        <select name="devTools">
-          {% for key, value in devTools %}
+        <select name="test">
+          <option selected value="default">---------</option>
+          {% for value in devTools %}
           <option value="{{ value }}">{{ value }}</option>
           {% endfor %}
         </select>

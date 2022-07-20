@@ -75,11 +75,17 @@ article .desc {
 article .desc h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgb(132, 255, 94);
 }
 
 article .desc p span {
   font-weight: bold;
   text-shadow: 0.1rem 0.1rem 0.1rem rgb(132, 255, 94);
+}
+
+article .desc span a {
+  text-decoration: none;
+  color: white;
 }
 
 article .btnContainer {

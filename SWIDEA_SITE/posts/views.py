@@ -31,19 +31,29 @@ def home(request):
 
 
 def create(request):
+    tools = DevTool.objects.all()
+    
     if request.method == "POST":
         title = request.POST["title"]
         req_photo = request.FILES["photo"]
         content = request.POST["content"]
         interest = request.POST["interest"]
-        devTools = request.POST["devTools"]
-
+        test = request.POST["test"]
+        for tool in tools:
+            if tool.name == test:
+                test = tool
+    
         Post.objects.create(title=title,
-                            interest=interest, devTools=devTools, content=content, photo=req_photo)
+                            interest=interest, content=content, photo=req_photo,test=test)
 
         return redirect("/")
 
-    context = {'devTools': Post.TOOL_CHOICE}
+    devToollist = []
+    tools = DevTool.objects.all()
+    for tool in tools:
+        devToollist.append(tool.name)
+        print("tool name is ", tool.name)
+    context = {'devTools': devToollist}
 
     return render(request, template_name="posts/create.html", context=context)
 
@@ -52,27 +62,37 @@ def detail(request, id):
     post = Post.objects.get(id=id)
 
     context = {
-        "post": post
+        "post": post,
     }
     return render(request, template_name="posts/detail.html", context=context)
 
 
 def update(request, id):
+    tools = DevTool.objects.all()
+    
     if request.method == "POST":
         title = request.POST["title"]
         req_photo = request.FILES["photo"]
         content = request.POST["content"]
         interest = request.POST["interest"]
-        devTools = request.POST["devTools"]
+        test = request.POST["test"]
+        for tool in tools:
+            if tool.name == test:
+                test = tool
 
         Post.objects.filter(id=id).update(
-            title=title, interest=interest, devTools=devTools,content=content, photo=req_photo)
+            title=title, interest=interest, content=content, photo=req_photo, test=test)
         return redirect(f"/post/{id}")
+
+    devToollist = []
+    tools = DevTool.objects.all()
+    for tool in tools:
+        devToollist.append(tool.name)
 
     post = Post.objects.get(id=id)
     context = {
         "post": post,
-        "devTools": Post.TOOL_CHOICE
+        'devTools': devToollist
     }
     return render(request, template_name="posts/update.html", context=context)
 
@@ -97,16 +117,29 @@ def create_devTool(request):
     return render(request, template_name="posts/devCreate.html", context=context)
 
 def detail_devTool(request, id):
+    flag = 0
     devtool = DevTool.objects.get(id=id)
+    for i in Post.objects.all():
+        if i.test.id == id:
+            flag = 1
+    
+    if flag == 0:
+        print("안들어옴")
+        all_post = []
+    else:
+        print("들어옴", id)
+        all_post = devtool.post_tool.all()
+        
     context = {
-        "devtool": devtool
+        "devtool": devtool,
+        "all_post": all_post,
     }
     return render(request, template_name="posts/devDetail.html", context=context)
 
 def home_devTool(request):
     devtools = DevTool.objects.all()
     context = {
-        "devtools": devtools,
+        "devtools": devtools
     }
     return render(request, template_name="posts/devHome.html", context=context)
 

@@ -31,6 +31,11 @@
         </div>
         <div class="canMake">
           <h4>&gt; 만들 수 있는 SW 목록</h4>
+          <div class="links">
+            {% for post in all_post %}
+            <a href="{% url 'posts:detail' post.id %}">{{ post.title }}</a>
+            {% endfor %}
+          </div>
         </div>
       </div>
       <div class="btnContainer">

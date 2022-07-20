@@ -89,6 +89,16 @@ article .detail .canMake h4 {
   padding: 0.5rem 0;
 }
 
+article .detail .canMake .links {
+  display: flex;
+  flex-direction: column;
+}
+
+article .detail .canMake a {
+  text-decoration: none;
+  color: white;
+}
+
 article .btnContainer {
   padding: 1rem;
   display: flex;

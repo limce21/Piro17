@@ -45,9 +45,9 @@
           <input type="number" name="interest" value="{{post.interest}}"/>
         </p>
         <p>예상 개발툴:</p>
-        <select name="devTools">
-          {% for key, value in devTools %}
-          <option value="{{ value }}" {% if value == post.devTools %}selected{% endif %}>{{ value }}</option>
+        <select name="test">
+          {% for value in devTools %}
+          <option value="{{ value }}" {% if value == post.test.name %}selected{% endif %}>{{ value }}</option>
           {% endfor %}
         </select>
         </p> 

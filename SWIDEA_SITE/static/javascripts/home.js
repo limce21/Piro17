@@ -1,6 +1,6 @@
 function plusInterest(id) {
-  state = document.querySelector(".interestState").innerText;
-  document.querySelector(".interestState").innerText = ++state;
+  state = document.getElementById(id).innerText;
+  document.getElementById(id).innerText = ++state;
 
   console.log(id);
   $.ajax({
@@ -20,8 +20,8 @@ function plusInterest(id) {
 }
 
 function minusInterest(id) {
-  state = document.querySelector(".interestState").innerText;
-  document.querySelector(".interestState").innerText = --state;
+  state = document.getElementById(id).innerText;
+  document.getElementById(id).innerText = --state;
 
   console.log(id);
   $.ajax({
