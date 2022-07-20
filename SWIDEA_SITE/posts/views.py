@@ -45,7 +45,6 @@ def create(request):
     
         Post.objects.create(title=title,
                             interest=interest, content=content, photo=req_photo,test=test)
-
         return redirect("/")
 
     devToollist = []
@@ -81,7 +80,7 @@ def update(request, id):
                 test = tool
 
         Post.objects.filter(id=id).update(
-            title=title, interest=interest, content=content, photo=req_photo, test=test)
+            title=title, interest=interest, content=content, test=test, photo=req_photo)
         return redirect(f"/post/{id}")
 
     devToollist = []
@@ -94,6 +93,7 @@ def update(request, id):
         "post": post,
         'devTools': devToollist
     }
+
     return render(request, template_name="posts/update.html", context=context)
 
 
