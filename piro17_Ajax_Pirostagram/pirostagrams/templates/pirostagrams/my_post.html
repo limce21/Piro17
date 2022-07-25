@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pirostagram</title>
+    <link rel="stylesheet" href="{% static 'css/post.css'%}?after" />
+    <script src="https://kit.fontawesome.com/ecfb069e3d.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img class="profile" src="{% static 'image/profile.png' %}" />
+        <div class="info-container">
+          <span class="user-id">{{user.username}}</span>
+          <span>{{post.location}}</span>
+        </div>
+      </div>
+      <div class="more"><i class="fa-solid fa-ellipsis"></i></div>
+    </header>
+    <main>
+      <div class="first-block">
+        <img class="post-img" src="{% static 'image/main.png' %}" />
+        <div class="main-container">
+          <div class="icon-container">
+            <div class="forLike">
+              {% if post.like == 0 %}
+              <button class="like-button" onclick="likeClick({{post.id}},0)"><i class="fa-regular fa-heart"></i></button>
+              {% elif post.like == 1%}
+              <button class="like-button" onclick="likeClick({{post.id}},1)"><i id="heart" class="fa-solid fa-heart"></i></button>
+              {%endif%}
+            </div>
+            <a href=""><i class="fa-regular fa-comment"></i></a>
+            <i class="fa-regular fa-paper-plane"></i>
+          </div>
+          <i id="postNum" class="fa-solid fa-circle"></i>
+          <div class="forBook">
+            <button class="bookmark-btn" onclick="bookmarkClick(0)">
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="second-block">
+        <span class="user-id">{{user.username}}</span>
+        <span>{{post.content}}</span>
+      </div>
+      <div class="comment-block">
+        <p class="comment-all">댓글 모두 보기</p>
+        <div class="comments">
+          {% for comment in comments%}
+          <p class="comment" value="{{comment.id}}"><span>piro_17</span>{{comment.comment}}<button class="delBtn" type="button" onclick="delete_comment({{comment.id}})">삭제</button></p>
+          {% endfor%}
+        </div>
+        <form>
+          <p>
+            <i class="fa-regular fa-face-smile"></i>
+            <input name="content" class="reg_comment" type="text" placeholder="댓글 달기..." />
+            <button type="button" onclick="register_comment({{post.id}})">게시</button>
+          </p>
+        </form>
+      </div>
+    </main>
+    <script>
+      const requestLike = new XMLHttpRequest();
+      const requestComment = new XMLHttpRequest();
+      const requestDelete = new XMLHttpRequest();
+
+      const delete_comment = (id) => {
+        console.log(id);
+        const url = "/delete_comment/";
+        requestDelete.open("POST", url, true);
+        requestDelete.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        requestDelete.send(JSON.stringify({ id: id }));
+      };
+
+      const register_comment = (id) => {
+        const url = "/register_comment/";
+        requestComment.open("POST", url, true);
+        requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        const comment = document.querySelector(".reg_comment").value;
+        requestComment.send(JSON.stringify({ id: id, type: comment }));
+      };
+
+      const likeClick = (id, type) => {
+        const url = "/like_ajax/";
+        requestLike.open("POST", url, true);
+        requestLike.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        requestLike.send(JSON.stringify({ id: id, type: type }));
+      };
+
+      requestLike.onreadystatechange = () => {
+        if (requestLike.readyState === XMLHttpRequest.DONE) {
+          const { type } = JSON.parse(requestLike.response);
+
+          const btn = document.querySelector(".like-button");
+          if (type == 1) {
+            btn.innerHTML = '<i id="heart" class="fa-solid fa-heart"></i>';
+            btn.setAttribute("onclick", "likeClick({{post.id}},1)");
+          } else {
+            btn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+            btn.setAttribute("onclick", "likeClick({{post.id}},0)");
+          }
+        }
+      };
+
+      requestComment.onreadystatechange = () => {
+        if (requestComment.readyState === XMLHttpRequest.DONE) {
+          const { type, last_id } = JSON.parse(requestComment.response);
+          const comments = document.querySelector(".comments");
+          let content = document.createTextNode(type);
+          let newComment = document.createElement("p");
+          let user = document.createElement("span");
+          let username = document.createTextNode("piro_17");
+          user.appendChild(username);
+          let delBtn = document.createElement("button");
+          let del = document.createTextNode("삭제");
+          delBtn.classList.add("delBtn");
+          delBtn.appendChild(del);
+          delBtn.setAttribute("onclick", "delete_comment({{comment.id}})");
+          newComment.classList.add("comment");
+          newComment.appendChild(user);
+          newComment.appendChild(content);
+          newComment.appendChild(delBtn);
+          newComment.setAttribute("value", last_id);
+          comments.appendChild(newComment);
+          document.querySelector(".reg_comment").value = "";
+        }
+      };
+
+      requestDelete.onreadystatechange = () => {
+        if (requestDelete.readyState === XMLHttpRequest.DONE) {
+          const { id } = JSON.parse(requestDelete.response);
+          const num = Number(id);
+          const comments = document.querySelector(".comments");
+          const del_comment = document.querySelectorAll(".comment");
+
+          del_comment.forEach((comment) => {
+            let value = comment.getAttribute("value");
+            if (Number(value) == num) {
+              const del_comt = comment;
+              del_comt.remove();
+            }
+          });
+        }
+      };
+
+      const bookmarkClick = (x) => {
+        const btn = document.querySelector(".bookmark-btn");
+        const bookmark = btn.parentNode;
+        if (x == 1) {
+          bookmark.innerHTML = '<button class="bookmark-btn" onclick="bookmarkClick(0)"><i class="fa-regular fa-bookmark"></i></button>';
+        } else {
+          bookmark.innerHTML = '<button class="bookmark-btn" onclick="bookmarkClick(1)"><i class="fa-solid fa-bookmark"></i></button>';
+        }
+      };
+    </script>
+  </body>
+</html>
